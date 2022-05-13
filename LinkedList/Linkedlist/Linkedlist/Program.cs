@@ -42,7 +42,7 @@ namespace Linkedlist
             {
                 //if the list(head) has already value, we start traversing the list from the beginning(head)
                 current = head;
-
+                //last element
                 while (current.next != null)
                 {
                     //current take the value from next element
@@ -132,18 +132,61 @@ namespace Linkedlist
             return current;
         }
 
+        public int indexOf(int inputValue)
+        {
+            LinkedListNode current = head;
+            int index = 0;
+
+            while(current != null)
+            {
+                if (current.data == inputValue)
+                {
+                    return index;
+                }
+
+                index++;
+                //Next node
+                current = current.next;
+            }
+
+            return -1;
+        }
+
+
+        public int removeByValue(int inputValue)
+        {
+            int indexofElement = indexOf(inputValue);
+            if(indexofElement < 0)
+            {
+                return indexofElement;
+            }
+            return removeAt(indexofElement).data;
+
+        }
+
+        public bool hasElelement()
+        {
+            return listSize > 0;
+        } 
+
+        public int size()
+        {
+            return listSize;
+        }
 
         public void printList()
         {
             LinkedListNode current = head;
-            while (current.next != null)
+            string result = "";
+            while (current != null)
             {
-                Console.WriteLine(current.data);
+              
+                result += current.next != null ? current.data+"-->" : current.data + "";
                 current = current.next;
 
             }
-            //last element
-            Console.WriteLine(current.data);
+            Console.WriteLine(result);
+
         }
 
 
@@ -164,14 +207,31 @@ namespace Linkedlist
             list.addEnd(node);
             list.addEnd(node2);
             list.printList();
-            Console.WriteLine("\n");
+            Console.WriteLine("Insert element in a index \n");
             //Insert specific index
             list.insert(2, node3);
             list.printList();
-            Console.WriteLine("\n");
+            Console.WriteLine("Remove Element By Index \n");
             //Deleteat indix position
             list.removeAt(2);
             list.printList();
+            Console.WriteLine("Find Index of Value \n");
+            //get  indix  by value
+            Console.WriteLine(list.indexOf(2));
+
+            //Remove by value
+            Console.WriteLine("Delete by Value \n");
+            Console.WriteLine(list.removeByValue(2));
+            Console.WriteLine("Current element inside the list \n");
+            list.printList();
+            Console.WriteLine("Has element inside the list \n");
+            Console.WriteLine(list.hasElelement());
+            Console.WriteLine("Size \n");
+            Console.WriteLine(list.size());
+
+
+
+
 
         }
     }
