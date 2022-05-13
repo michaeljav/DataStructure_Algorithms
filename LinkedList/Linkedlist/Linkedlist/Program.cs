@@ -17,7 +17,9 @@ namespace Linkedlist
     {
 
         int listSize;
-        LinkedListNode head = null;
+        //LinkedListNode head = null;
+        public LinkedListNode head { get; set; }
+
 
         public LinkedList()
         {
@@ -25,6 +27,7 @@ namespace Linkedlist
             listSize = 0;
         }
 
+     
         public void addEnd(LinkedListNode inputNode)
         {
             LinkedListNode node = inputNode;
@@ -189,6 +192,14 @@ namespace Linkedlist
 
         }
 
+        //recursively
+        public void printListRecursiveLy(LinkedListNode head)
+        {
+            if (head == null) return;
+            Console.WriteLine(head.data);
+            printListRecursiveLy(head.next);
+        }
+
 
     }
 
@@ -203,9 +214,16 @@ namespace Linkedlist
             LinkedListNode node2 = new LinkedListNode(2);
             LinkedListNode node3 = new LinkedListNode(3);
 
+
+
             LinkedList list = new LinkedList();
             list.addEnd(node);
             list.addEnd(node2);
+            for (int i = 4; i <= 10; i++)
+            {
+                list.addEnd(new LinkedListNode(i));
+            }
+          
             list.printList();
             Console.WriteLine("Insert element in a index \n");
             //Insert specific index
@@ -228,6 +246,8 @@ namespace Linkedlist
             Console.WriteLine(list.hasElelement());
             Console.WriteLine("Size \n");
             Console.WriteLine(list.size());
+            Console.WriteLine("\n Print Recursively \n");
+            list.printListRecursiveLy(list.head);
 
 
 
