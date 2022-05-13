@@ -97,7 +97,41 @@ namespace Linkedlist
 
         }
 
-       
+        public LinkedListNode removeAt(int position)
+        {
+            //valid the range
+            if (position < 0 || position >= listSize)
+            {
+                return null;
+            }
+
+            LinkedListNode current = head;
+            LinkedListNode previous = null;
+            int index = 0;
+
+            //if it is 0
+            if (position == 0)
+            {
+                head = current.next;
+            }
+            else
+            {
+                //loop through the list till find the position
+                while (index++ < position)
+                {
+                    previous = current;
+                    current = current.next;
+                }
+
+                //we bind the previous element with the next of the current (we skip the element to remove it)
+                previous.next = current.next;
+            }
+
+            listSize--;
+
+            return current;
+        }
+
 
         public void printList()
         {
@@ -135,7 +169,9 @@ namespace Linkedlist
             list.insert(2, node3);
             list.printList();
             Console.WriteLine("\n");
-         
+            //Deleteat indix position
+            list.removeAt(2);
+            list.printList();
 
         }
     }
