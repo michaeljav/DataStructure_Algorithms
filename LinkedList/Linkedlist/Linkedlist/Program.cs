@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Linkedlist
 {
@@ -127,7 +128,7 @@ namespace Linkedlist
                 }
 
                 //we bind the previous element with the next of the current (we skip the element to remove it)
-                previous.next = current.next;
+                previous.next = current.next; 
             }
 
             listSize--;
@@ -200,6 +201,19 @@ namespace Linkedlist
             printListRecursiveLy(head.next);
         }
 
+        //Linked List Values
+        public int[] linkedListValues(LinkedListNode head)
+        {
+          List<int> values = new List<int>();
+            LinkedListNode current = head;
+              while(current != null)
+            {
+                values.Add(current.data);
+                current = current.next;
+            }
+            return values.ToArray();
+
+        }
 
     }
 
@@ -248,6 +262,12 @@ namespace Linkedlist
             Console.WriteLine(list.size());
             Console.WriteLine("\n Print Recursively \n");
             list.printListRecursiveLy(list.head);
+            Console.WriteLine("\n Print Array values from list \n");
+            int[] valus = list.linkedListValues(list.head);
+            foreach (var item in valus)
+            {
+                Console.WriteLine(item);
+            }
 
 
 
