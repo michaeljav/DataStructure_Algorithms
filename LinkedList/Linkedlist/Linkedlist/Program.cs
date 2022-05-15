@@ -238,6 +238,28 @@ namespace Linkedlist
             return head.data + SumListRecursively(head.next);          
         }
 
+        //return target value from linkedlist
+        public bool FindValue(LinkedListNode head, int target)
+        {
+            LinkedListNode current = head;
+            while (current != null)
+            {
+                if (current.data == target) return true;
+                current = current.next;
+            }
+
+            return false;
+            
+        }
+
+        //return recursively target value from linkedlist
+        public bool FindValueRecursively(LinkedListNode head, int target)
+        {
+            if (head == null) return false;
+            if (head.data == target) return true;
+            return FindValueRecursively(head.next, target);
+        }
+
     }
 
 
@@ -303,9 +325,20 @@ namespace Linkedlist
             // Console.WriteLine("\n Print Sum  list \n");
             //int sum=list.SumList(list.head);
 
-            Console.WriteLine("\n Print Sum  list Recursively \n");
-            int sum=list.SumListRecursively(list.head);            
-            Console.WriteLine(sum);
+            //Console.WriteLine("\n Print Sum  list Recursively \n");
+            //int sum=list.SumListRecursively(list.head);            
+            //Console.WriteLine(sum);
+
+            //Console.WriteLine("\n Find target \n");
+            //bool finded = list.FindValue(list.head, 20);
+            //Console.WriteLine(finded);
+
+
+            Console.WriteLine("\n Find target Recursively \n");
+            bool finded = list.FindValueRecursively(list.head, 1);
+            Console.WriteLine(finded);
+            
+
 
 
 
