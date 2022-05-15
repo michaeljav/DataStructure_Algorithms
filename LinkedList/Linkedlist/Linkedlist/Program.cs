@@ -201,7 +201,7 @@ namespace Linkedlist
             printListRecursiveLy(head.next);
         }
 
-        //Linked List Values
+        //Linked  return List Values
         public int[] linkedListValues(LinkedListNode head)
         {
           List<int> values = new List<int>();
@@ -213,6 +213,29 @@ namespace Linkedlist
             }
             return values.ToArray();
 
+        }
+
+
+        //Return Sum of values insied Linkedlist
+        public int SumList(LinkedListNode head)
+        {
+            int sum = 0;
+            LinkedListNode current = head;
+
+            while (current != null)
+            {
+                sum += current.data;
+                current = current.next;
+            }
+
+            return sum;
+        }
+
+        //Return Sum of values insied Linkedlist Recursively
+        public int SumListRecursively(LinkedListNode head)
+        {
+            if (head == null) return 0;  
+            return head.data + SumListRecursively(head.next);          
         }
 
     }
@@ -233,42 +256,56 @@ namespace Linkedlist
             LinkedList list = new LinkedList();
             list.addEnd(node);
             list.addEnd(node2);
-            for (int i = 4; i <= 10; i++)
+            for (int i = 4; i <= 6; i++)
             {
                 list.addEnd(new LinkedListNode(i));
             }
-          
+
             list.printList();
+
             Console.WriteLine("Insert element in a index \n");
             //Insert specific index
             list.insert(2, node3);
             list.printList();
-            Console.WriteLine("Remove Element By Index \n");
-            //Deleteat indix position
-            list.removeAt(2);
-            list.printList();
-            Console.WriteLine("Find Index of Value \n");
-            //get  indix  by value
-            Console.WriteLine(list.indexOf(2));
 
-            //Remove by value
-            Console.WriteLine("Delete by Value \n");
-            Console.WriteLine(list.removeByValue(2));
-            Console.WriteLine("Current element inside the list \n");
-            list.printList();
-            Console.WriteLine("Has element inside the list \n");
-            Console.WriteLine(list.hasElelement());
-            Console.WriteLine("Size \n");
-            Console.WriteLine(list.size());
-            Console.WriteLine("\n Print Recursively \n");
-            list.printListRecursiveLy(list.head);
-            Console.WriteLine("\n Print Array values from list \n");
-            int[] valus = list.linkedListValues(list.head);
-            foreach (var item in valus)
-            {
-                Console.WriteLine(item);
-            }
+            //Console.WriteLine("Remove Element By Index \n");
+            ////Deleteat indix position
+            //list.removeAt(2);
+            //list.printList();
 
+            //Console.WriteLine("Find Index of Value \n");
+            ////get  indix  by value
+            //Console.WriteLine(list.indexOf(2));
+
+            ////Remove by value
+            //Console.WriteLine("Delete by Value \n");
+            //Console.WriteLine(list.removeByValue(2));
+
+            //Console.WriteLine("Current element inside the list \n");
+            //list.printList();
+
+            //Console.WriteLine("Has element inside the list \n");
+            //Console.WriteLine(list.hasElelement());
+
+            //Console.WriteLine("Size \n");
+            //Console.WriteLine(list.size());
+
+            //Console.WriteLine("\n Print Recursively \n");
+            //list.printListRecursiveLy(list.head);
+
+            //Console.WriteLine("\n Print Array values from list \n");
+            //int[] valus = list.linkedListValues(list.head);
+            //foreach (var item in valus)
+            //{
+            //    Console.WriteLine(item);
+            //}
+
+            // Console.WriteLine("\n Print Sum  list \n");
+            //int sum=list.SumList(list.head);
+
+            Console.WriteLine("\n Print Sum  list Recursively \n");
+            int sum=list.SumListRecursively(list.head);            
+            Console.WriteLine(sum);
 
 
 
