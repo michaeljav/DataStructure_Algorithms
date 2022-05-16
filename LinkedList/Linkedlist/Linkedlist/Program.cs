@@ -28,7 +28,7 @@ namespace Linkedlist
             listSize = 0;
         }
 
-     
+
         public void addEnd(LinkedListNode inputNode)
         {
             LinkedListNode node = inputNode;
@@ -128,7 +128,7 @@ namespace Linkedlist
                 }
 
                 //we bind the previous element with the next of the current (we skip the element to remove it)
-                previous.next = current.next; 
+                previous.next = current.next;
             }
 
             listSize--;
@@ -141,7 +141,7 @@ namespace Linkedlist
             LinkedListNode current = head;
             int index = 0;
 
-            while(current != null)
+            while (current != null)
             {
                 if (current.data == inputValue)
                 {
@@ -160,7 +160,7 @@ namespace Linkedlist
         public int removeByValue(int inputValue)
         {
             int indexofElement = indexOf(inputValue);
-            if(indexofElement < 0)
+            if (indexofElement < 0)
             {
                 return indexofElement;
             }
@@ -171,7 +171,7 @@ namespace Linkedlist
         public bool hasElelement()
         {
             return listSize > 0;
-        } 
+        }
 
         public int size()
         {
@@ -184,8 +184,8 @@ namespace Linkedlist
             string result = "";
             while (current != null)
             {
-              
-                result += current.next != null ? current.data+"-->" : current.data + "";
+
+                result += current.next != null ? current.data + "-->" : current.data + "";
                 current = current.next;
 
             }
@@ -204,9 +204,9 @@ namespace Linkedlist
         //Linked  return List Values
         public int[] linkedListValues(LinkedListNode head)
         {
-          List<int> values = new List<int>();
+            List<int> values = new List<int>();
             LinkedListNode current = head;
-              while(current != null)
+            while (current != null)
             {
                 values.Add(current.data);
                 current = current.next;
@@ -234,8 +234,8 @@ namespace Linkedlist
         //Return Sum of values insied Linkedlist Recursively
         public int SumListRecursively(LinkedListNode head)
         {
-            if (head == null) return 0;  
-            return head.data + SumListRecursively(head.next);          
+            if (head == null) return 0;
+            return head.data + SumListRecursively(head.next);
         }
 
         //return target value from linkedlist
@@ -249,7 +249,7 @@ namespace Linkedlist
             }
 
             return false;
-            
+
         }
 
         //return recursively target value from linkedlist
@@ -265,15 +265,15 @@ namespace Linkedlist
         {
             if (head == null) return null;
             if (index == 0) return head.data;
-         return  getIndexRecursively(head.next, index-1);
+            return getIndexRecursively(head.next, index - 1);
         }
 
         //Return   index from linkedlist
-        public int? getIndex(LinkedListNode head,int index)
+        public int? getIndex(LinkedListNode head, int index)
         {
             LinkedListNode current = head;
 
-            while(current != null)
+            while (current != null)
             {
                 if (index-- == 0) return current.data;
                 current = current.next;
@@ -299,8 +299,8 @@ namespace Linkedlist
                 prev_newLinkedlist = current;
                 //Set again from 2--> forward to conitnue the loop
                 current = next;
-             //   Console.WriteLine(current.data);
-              //  current = current.next;
+                //   Console.WriteLine(current.data);
+                //  current = current.next;
 
             }
 
@@ -308,56 +308,119 @@ namespace Linkedlist
         }
 
         //Reverse Linked list recursively
-        public LinkedListNode ReverseLinkedListRecursively(LinkedListNode head, LinkedListNode prev =null)
+        public LinkedListNode ReverseLinkedListRecursively(LinkedListNode head, LinkedListNode prev = null)
         {
             if (head == null) return prev;
             LinkedListNode next = head.next;
             head.next = prev;
-            return ReverseLinkedListRecursively(next, head);           
+            return ReverseLinkedListRecursively(next, head);
         }
 
         //Zipper Linkedlist
         public LinkedListNode ZipperLinkedlist(LinkedListNode head, LinkedListNode head2)
         {
-            LinkedListNode current = head;
-            LinkedListNode current2 = head;
-            LinkedListNode zipper = null;
 
-            //get longer
-            int index = 0;
-            int index2 = 0;
-            while (current != null)
-            {
-                index+=1;
-                current = current.next;
-            }
-            while (current2 != null)
-            {
-                index += 1;
-                current2 = current2.next;
-            }
+            LinkedListNode tail = head;
+            LinkedListNode current = head.next;
+            LinkedListNode current2 = head2;
+            int count = 0;
 
-            if(index > index2)
+            while(current != null && current2 != null)
             {
-                while (current != null)
+                //even
+                if (count % 2 == 0)
                 {
-                    
-                    current = current.next;
-                }
-            }else
-            {
-                while (current2 != null)
-                {
-                  
+                    tail.next = current2;
                     current2 = current2.next;
                 }
+                //odd
+                else
+                {
+                    tail.next = current;
+                    current = current.next;
+
+                }
+                tail = tail.next;                
+                count += 1;
             }
 
-
-
-            return null;
+            if (current != null)
+            {
+                tail.next = current;
+            }
+            if (current2 != null)
+            {
+                tail.next = current2;
+            }
+            return head;
 
         }
+
+        //zipper list recursively
+        public LinkedListNode ZipperLinkedlistRecursively(LinkedListNode head, LinkedListNode head2)
+        {
+            if (head == null && head2 == null) return null;
+            if (head == null) return head2;
+            if (head2 == null ) return head;
+
+            LinkedListNode next1 = head.next;
+            LinkedListNode next2 = head2.next;
+             head.next = head2;           
+            head2.next = ZipperLinkedlistRecursively(next1, next2);
+            return head;
+        }
+
+
+
+        //bad
+        //public LinkedListNode ZipperLinkedlist(LinkedListNode head, LinkedListNode head2)
+        //{
+        //    LinkedListNode current = head;
+        //    LinkedListNode current2 = head2;
+        //    LinkedListNode zipper = null;
+
+        //    //get longer
+        //    int index = 0;
+        //    int index2 = 0;
+        //    while (current != null)
+        //    {
+        //        index+=1;
+        //        current = current.next;
+        //    }
+        //    while (current2 != null)
+        //    {
+        //        index2 += 1;
+        //        current2 = current2.next;
+        //    }
+
+        //    if(index >= index2)
+        //    {
+        //        current = head;
+        //        current2 = head2;
+        //        while (current != null)
+        //        {
+        //            zipper = current;
+        //            zipper.next = current2;
+
+        //            current2 = current2.next;
+        //            current = current.next;
+        //        }
+        //    }else
+        //    {
+        //        current = head;
+        //        current2 = head2;
+        //        while (current2 != null)
+        //        {
+
+        //            current2 = current2.next;
+        //        }
+        //    }
+
+
+
+        //    return null;
+
+        //}
 
     }
 
@@ -452,24 +515,28 @@ namespace Linkedlist
             //list.printListRecursiveLy(finded);
 
 
-            Console.WriteLine("\n Reverse linked list Recursively \n");
-            LinkedListNode finded = list.ReverseLinkedListRecursively(list.head);
-            list.printListRecursiveLy(finded);
-
-
-            //Zipper list
-            //creand second
-            //LinkedList list2 = new LinkedList();
-            //for (int i = 1; i <= 2; i++)
-            //{
-            //    list.addEnd(new LinkedListNode(i));
-            //}
-
-            //Console.WriteLine("\n Zipper List \n");
+            //Console.WriteLine("\n Reverse linked list Recursively \n");
             //LinkedListNode finded = list.ReverseLinkedListRecursively(list.head);
             //list.printListRecursiveLy(finded);
 
 
+            //Zipper list
+            //creand second
+            LinkedList list2 = new LinkedList();
+            for (int i = 6; i <= 10; i++)
+            {
+                list2.addEnd(new LinkedListNode(i));
+            }
+
+            //Console.WriteLine("\n Zipper List \n");
+            //LinkedListNode finded = list.ZipperLinkedlist(list.head, list2.head);
+            //list.printListRecursiveLy(finded);
+
+
+            Console.WriteLine("\n Zipper List recursively \n");
+            LinkedListNode finded = list.ZipperLinkedlistRecursively(list.head, list2.head);
+            list.printListRecursiveLy(finded);
+            
 
 
 
