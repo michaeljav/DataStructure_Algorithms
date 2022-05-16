@@ -260,6 +260,105 @@ namespace Linkedlist
             return FindValueRecursively(head.next, target);
         }
 
+        //Return recursively  index from linkedlist
+        public int? getIndexRecursively(LinkedListNode head, int index)
+        {
+            if (head == null) return null;
+            if (index == 0) return head.data;
+         return  getIndexRecursively(head.next, index-1);
+        }
+
+        //Return   index from linkedlist
+        public int? getIndex(LinkedListNode head,int index)
+        {
+            LinkedListNode current = head;
+
+            while(current != null)
+            {
+                if (index-- == 0) return current.data;
+                current = current.next;
+            }
+            return null;
+        }
+
+        //Reverse Linked list
+        //1-->2-->3-->null
+        //3-->2-->1-->null
+
+        public LinkedListNode ReverseLinkedList(LinkedListNode head)
+        {
+            LinkedListNode current = head; // current = 1 --> 2 --> null
+            LinkedListNode prev_newLinkedlist = null;
+            while (current != null)
+            {
+                //temp from next(2-->3-->null) to null
+                LinkedListNode next = current.next;
+                //Set null in property  Next  for getting the First node 1--> null
+                current.next = prev_newLinkedlist;
+                //first node inserted in final list 1--> null
+                prev_newLinkedlist = current;
+                //Set again from 2--> forward to conitnue the loop
+                current = next;
+             //   Console.WriteLine(current.data);
+              //  current = current.next;
+
+            }
+
+            return prev_newLinkedlist;
+        }
+
+        //Reverse Linked list recursively
+        public LinkedListNode ReverseLinkedListRecursively(LinkedListNode head, LinkedListNode prev =null)
+        {
+            if (head == null) return prev;
+            LinkedListNode next = head.next;
+            head.next = prev;
+            return ReverseLinkedListRecursively(next, head);           
+        }
+
+        //Zipper Linkedlist
+        public LinkedListNode ZipperLinkedlist(LinkedListNode head, LinkedListNode head2)
+        {
+            LinkedListNode current = head;
+            LinkedListNode current2 = head;
+            LinkedListNode zipper = null;
+
+            //get longer
+            int index = 0;
+            int index2 = 0;
+            while (current != null)
+            {
+                index+=1;
+                current = current.next;
+            }
+            while (current2 != null)
+            {
+                index += 1;
+                current2 = current2.next;
+            }
+
+            if(index > index2)
+            {
+                while (current != null)
+                {
+                    
+                    current = current.next;
+                }
+            }else
+            {
+                while (current2 != null)
+                {
+                  
+                    current2 = current2.next;
+                }
+            }
+
+
+
+            return null;
+
+        }
+
     }
 
 
@@ -278,10 +377,10 @@ namespace Linkedlist
             LinkedList list = new LinkedList();
             list.addEnd(node);
             list.addEnd(node2);
-            for (int i = 4; i <= 6; i++)
-            {
-                list.addEnd(new LinkedListNode(i));
-            }
+            //for (int i = 4; i <= 6; i++)
+            //{
+            //    list.addEnd(new LinkedListNode(i));
+            //}
 
             list.printList();
 
@@ -334,10 +433,42 @@ namespace Linkedlist
             //Console.WriteLine(finded);
 
 
-            Console.WriteLine("\n Find target Recursively \n");
-            bool finded = list.FindValueRecursively(list.head, 1);
-            Console.WriteLine(finded);
-            
+            //Console.WriteLine("\n Find target Recursively \n");
+            //bool finded = list.FindValueRecursively(list.head, 1);
+            //Console.WriteLine(finded);
+
+
+            //Console.WriteLine("\n Find value by index  Recursively \n");
+            //int? finded = list.getIndexRecursively(list.head, 1);
+            //Console.WriteLine(finded);
+
+            //Console.WriteLine("\n Find value by index  \n");
+            //int? finded = list.getIndex(list.head, 45);
+            //Console.WriteLine(finded);
+
+
+            //Console.WriteLine("\n Reverse linked list \n");
+            //LinkedListNode finded = list.ReverseLinkedList(list.head);        
+            //list.printListRecursiveLy(finded);
+
+
+            Console.WriteLine("\n Reverse linked list Recursively \n");
+            LinkedListNode finded = list.ReverseLinkedListRecursively(list.head);
+            list.printListRecursiveLy(finded);
+
+
+            //Zipper list
+            //creand second
+            //LinkedList list2 = new LinkedList();
+            //for (int i = 1; i <= 2; i++)
+            //{
+            //    list.addEnd(new LinkedListNode(i));
+            //}
+
+            //Console.WriteLine("\n Zipper List \n");
+            //LinkedListNode finded = list.ReverseLinkedListRecursively(list.head);
+            //list.printListRecursiveLy(finded);
+
 
 
 
